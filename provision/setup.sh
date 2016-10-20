@@ -3,6 +3,7 @@
 DB_NAME=$1
 DB_USERNAME=$2
 DB_PASSWORD=$3
+PROJECT=$4
 
 echo "Updating"
 apt-get update
@@ -30,10 +31,14 @@ apt-get install -y php5-cli php5-common php5-dev
 apt-get install -y curl php5-curl php5-gd php5-intl
 
 echo "Setting up sync directory"
-if ! [ -L /var/www/html ]; then
-	rm -rf /var/www/html
-	ln -fs /vagrant /var/www/html
+# Create project directory
+if ! [ -L "/var/www/$PROJECT" ]; then
+	rm -rf "/var/www/$PROJECT"
+	ln -fs /vagrant "/var/www/$PROJECT"
 fi
+  		  
+# Move vhost file
+mv "/home/vagrant/$PROJECT.conf" /etc/apache2/sites-enabled/
 
 echo "Finishing"
 service apache2 restart
