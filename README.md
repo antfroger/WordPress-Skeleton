@@ -9,6 +9,27 @@ This is simply a skeleton repo for a WordPress site. Use it to jump-start your W
 * `wp-config.php` in the root (because it can't be in `/wp/`)
 * All writable directories are symlinked to similarly named locations under `/shared/`.
 
+## Installation
+
+0. Prerequisites
+	* Install [vagrant](https://www.vagrantup.com/)
+	* Install [VirtualBox](https://www.virtualbox.org/)
+1. Run `vagrant up` on the root directory
+2. Add `192.168.33.10 dev.my-project.com` in /etc/hosts
+3. Install Wordpress
+	1. Install Wordpress going to http://dev.my-project.com/wp/wp-admin/install.php
+	2. Follow the steps
+	3. Connect to http://dev.my-project.com/wp/wp-login.php
+	4. Go to http://dev.my-project.com/wp/wp-admin/options-general.php
+	5. Remove the trailing wp in "Site Address (URL)" and save
+5. Done, you can access to http://dev.my-project.com!
+
+To change the URL of the project (dev.my-project.com):
+
+* Update all `dev.my-project.com` in [provision/vhosts/dev.my-project.com.conf](/provision/vhosts/dev.my-project.com.conf)
+* Update the name in [Vagrantfile](/Vagrantfile)
+* Change `192.168.33.10 dev.my-project.com` in /etc/hosts
+
 ## Questions & Answers
 
 **Q:** Will you accept pull requests?  
